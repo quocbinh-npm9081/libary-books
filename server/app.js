@@ -1,10 +1,14 @@
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
-
+const mongoDb = require('./config/mongoDB');
 
 //load schema & rersolvers
 const typeDefs = require('./schema/schema')
 const resolvers = require('./resolver/resolver')
+
+//connect DB
+mongoDb.connect();
+
 
 async function startApolloServer() {
     const app = express()
