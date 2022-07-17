@@ -1,7 +1,7 @@
 const express = require('express')
 const { ApolloServer } = require('apollo-server-express')
 const mongoDb = require('./config/mongoDB');
-
+const mongoDataMethods = require('./data/api');
 //load schema & rersolvers
 const typeDefs = require('./schema/schema')
 const resolvers = require('./resolver/resolver')
@@ -9,13 +9,17 @@ const resolvers = require('./resolver/resolver')
 //connect DB
 mongoDb.connect();
 
+//load DB methods
+
+
 
 async function startApolloServer() {
     const app = express()
 
     const server = new ApolloServer({
         typeDefs,
-        resolvers
+        resolvers,
+        context: () => ({ mongoDataMethods })
     })
     await server.start();
 

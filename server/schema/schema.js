@@ -23,8 +23,8 @@ const typeDefs = gql `
 
     # MUTATION (thông qua mutation để save dữ liệu và db) 
     type Mutation{
-        createAuthor(id : ID!, name:String, age:Int) : Author,
-        createBook(id : ID!, name:String, genre:String, authorId: ID!) : Book
+        createAuthor(name:String, age:Int) : Author,
+        createBook(name:String, genre:String, authorId: ID!) : Book
     }
 
 `

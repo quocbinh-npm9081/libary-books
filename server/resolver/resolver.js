@@ -1,29 +1,50 @@
-const { books, authors } = require('../data/static');
+const Author = require('../models/Author');
+const Book = require('../models/Book');
 
 const resolvers = {
     //QUERY - GET
     Query: {
-        book: (parent, arguments) => books.find(book => book.id.toString() === arguments.id),
-        author: (parent, arguments) => authors.find(author => author.id.toString() === arguments.id),
-        books: () => books,
-        authors: () => authors,
+        book: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.getBookById(arguments.id)
+        },
+
+        author: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.getAuthorById(arguments.id)
+        },
+
+        books: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.getBooks();
+        },
+
+        authors: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.getAuthors();
+        },
+
     },
 
     Book: {
-        author: (parent, arguments) => {
+        author: async(parent, arguments, context) => {
+            const authors = await context.mongoDataMethods.getAuthors();
             return authors.find(author => author.id.toString() === parent.authorId)
         }
     },
     Author: {
-        books: (parent, arguments) => {
+        books: async(parent, arguments, context) => {
+            const books = await context.mongoDataMethods.getBooks();
             return books.filter(book => book.authorId === parent.id);
         }
     },
 
     //MUTATION - POST 
     Mutation: {
-        createAuthor: (parent, arguments) => arguments,
-        createBook: (parent, arguments) => arguments
+        createAuthor: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.createAuthor(arguments)
+        },
+
+
+        createBook: async(parent, arguments, context) => {
+            return await context.mongoDataMethods.createBook(arguments)
+        }
 
     },
 }

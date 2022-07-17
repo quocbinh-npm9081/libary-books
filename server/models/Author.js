@@ -10,6 +10,9 @@ const AuthorSchema = new Schema({
     },
     authorId: {
         type: String
+    },
+    age: {
+        type: Number
     }
 })
 

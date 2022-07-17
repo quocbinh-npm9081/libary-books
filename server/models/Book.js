@@ -5,8 +5,11 @@ const BookSchema = new Schema({
         type: String,
         require
     },
-    age: {
-        type: Number
+    genre: {
+        type: String
+    },
+    authorId: {
+        type: String
     }
 })
 
