@@ -4,9 +4,13 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Skeleton from 'react-loading-skeleton'
 
 import { useQuery } from '@apollo/client';
-import { getSingleBook } from '../graphql-client/query'
+import { getSingleBook } from '../graphql-client/queries'
 const BookDetail = ({ bookSelected }) => {
-    const { loading, error, data } = useQuery(getSingleBook, { variables: { id: bookSelected } });
+    const { loading, error, data } = useQuery(getSingleBook,
+        {
+            variables: { id: bookSelected },
+            skip: bookSelected === null
+        });
 
     return (
         <>

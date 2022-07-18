@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { useQuery } from '@apollo/client';
-import { getBooks } from '../graphql-client/query';
+import { getBooks } from '../graphql-client/queries';
 import BookDetail from './BookDetail'
 
 import Skeleton from 'react-loading-skeleton'
