@@ -8,7 +8,7 @@ const typeDefs = gql `
         author: Author
     }
     type Author {
-        id: ID!, #require
+        id: ID, #require
         name :String,
         age: Int,  
         books : [Book]  
@@ -16,9 +16,9 @@ const typeDefs = gql `
     #ROOT TYPE
     type Query {
         books: [Book], # array nhieu quyen sach
-        book(id: ID!): Book ,# truy xuat tim 1 quyen sach theo ID
+        book(id: ID): Book ,# truy xuat tim 1 quyen sach theo ID
         authors: [Author],
-        author(id: ID!): Author
+        author(id: ID): Author
     }
 
     # MUTATION (thông qua mutation để save dữ liệu và db) 
